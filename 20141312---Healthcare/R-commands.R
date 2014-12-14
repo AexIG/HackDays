@@ -1,9 +1,3 @@
-#Initial bit of data munging (remove NAs)
-#setwd('Personal/HackDays/20141213 - Healthcare/west-africa-ebola-outbreak/')
-flights <- read.csv('Data/flights.csv')
-newFlights <- filter(flights, complete.cases(flights) == TRUE)
-dim(newFlights)
-
 #Use ebola data to try and plot an interactive plot showing the values
 #with date as our interactive column.
 library(reshape2)
@@ -28,35 +22,3 @@ M <- gvisMotionChart(ebola_wide2, idvar='country2', timevar='Date',
                      yvar = 'Number of confirmed Ebola cases in the last 21 days', 
                      colorvar = 'Country')
 plot(M)
-
-# #===================================================================
-# #Let's look more closely at data relating to Guinea
-# medicine <- read.csv('Data/2014-12-03.csv')
-# #First thing is that epi.week cannot be used
-# #Split in the word 'to'
-# date_breakdown <- str_split(medicine$Epi.week, 'to')
-# source('date_sync.R')
-# medicine$date_from <- as.Date(sapply(date_breakdown, date_synchronisation), format = '%d %B %Y')
-# medicine$date_to <- as.Date(sapply(date_breakdown,function(x) x[2]), format = '%d %B %Y')
-# 
-# #Attempted to replicate plot from above, but failed. Look at later
-# #Use same thing as before
-# #Turn into wide format
-# red_medicine = medicine[c(
-#   "Location",          "Ebola.measure",
-#   "Case.definition",   "Ebola.data.source",         
-#   "Numeric", "date_from"
-# )]
-# red_medicine <- filter(red_medicine, Ebola.measure == 'Number of cases')
-# red_medicine$Ebola.measure <- NULL
-# medicine2 <- dcast(red_medicine, 
-#                    Location + date_from ~ Case.definition, 
-# #                   Ebola.data.source + Case.definition + Location + date_from ~ Ebola.measure, 
-#                    value.var = 'Numeric', fun.aggregate = sum)
-# M2 <- gvisMotionChart(medicine2, idvar='Location', timevar='date_from', 
-#                      xvar = 'Probable', 
-#                      yvar = 'Suspected')
-# #, 
-# #                     colorvar = 'Location')
-# plot(M2)
-# #===================================================================

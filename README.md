@@ -1,4 +1,4 @@
 HackDays
 ========
 
-Code written on HackDays, Coding Mojos, etc.
+Code written on HackDays, Coding Dojos, etc.

@@ -54,4 +54,7 @@ for (i in 1:nrow(df))
   listInfo[[i]] <- data.frame(id = df$id[i], meetups = meetups)
   }
 }
+# Close the browser
 remDr$close()
+# Concatenate all of the meetup groups
+allMeetups <- ldply(listInfo)

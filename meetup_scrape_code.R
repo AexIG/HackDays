@@ -1,3 +1,4 @@
+# This code was written to find which other meetups the members of the London Kaggle meetup were members of.
 # Read in libraries used. Note that RSelenium has been loaded up via github
 library(XML)
 library(RCurl)
@@ -32,7 +33,7 @@ for (page in 2:totalPages)
 }
 df <- data.frame(id = 1:length(name), name = name, href = href, stringsAsFactors = FALSE) %>% unique
 
-# Loop overall the urls, collecting the meetups groups in a big list
+# Loop over all of the urls, collecting the meetups groups in a big list
 df$intro = ''
 listInfo <- list()
 for (i in 1:nrow(df))
@@ -58,3 +59,4 @@ for (i in 1:nrow(df))
 remDr$close()
 # Concatenate all of the meetup groups
 allMeetups <- ldply(listInfo)
+meetupCounts <- table(allMeetups$meetups)
